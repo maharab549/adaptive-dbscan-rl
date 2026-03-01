@@ -1,10 +1,12 @@
 import argparse
 import json
 import os
+import sys
 import numpy as np
 from sklearn.datasets import make_blobs, make_moons
 from sklearn.cluster import DBSCAN, KMeans, OPTICS, AgglomerativeClustering
 from sklearn.metrics import silhouette_score, davies_bouldin_score, calinski_harabasz_score
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from adaptive_dbscan_rl.training.train import train_agents
 from adaptive_dbscan_rl.visualization.plotting import plot_clusters
 from adaptive_dbscan_rl.utils.seeds import set_global_seed
@@ -50,7 +52,7 @@ def main():
     labels_optics = OPTICS().fit_predict(X)
     labels_agg = AgglomerativeClustering(n_clusters=len(np.unique(labels_adapt)) - (1 if -1 in labels_adapt else 0)).fit_predict(X)
     results = {
-        "adaptive_dbscan": {"params": {"eps": best_params[0], "min_samples": best_params[1]}, "metrics": metrics(X, labels_adapt)},
+        "adaptive_dbscan": {"params": {"eps": float(best_params[0]), "min_samples": int(best_params[1])}, "metrics": metrics(X, labels_adapt)},
         "dbscan_default": {"metrics": metrics(X, labels_dbscan)},
         "kmeans": {"metrics": metrics(X, labels_kmeans)},
         "optics": {"metrics": metrics(X, labels_optics)},

@@ -1,5 +1,8 @@
 import numpy as np
-from gym import Env, spaces
+try:
+    from gym import Env, spaces
+except Exception:
+    from gymnasium import Env, spaces
 from sklearn.metrics import silhouette_score, davies_bouldin_score, calinski_harabasz_score
 from sklearn.cluster import DBSCAN
 
