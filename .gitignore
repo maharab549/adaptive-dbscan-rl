@@ -2,6 +2,24 @@ __pycache__/
 .pytest_cache/
 .venv/
 env/
-results/
-*.png
-*.json
+venv/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Tooling caches
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+
+# Local experiment outputs
+results/*.png
+results/*.json
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
